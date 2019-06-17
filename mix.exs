@@ -1,7 +1,7 @@
 defmodule Arc.Ecto.Mixfile do
   use Mix.Project
 
-  @version "0.11.2"
+  @version "0.12.2"
 
   def project do
     [app: :arc_ecto,
@@ -33,16 +33,16 @@ defmodule Arc.Ecto.Mixfile do
   end
 
   defp package do
-    [maintainers: ["Sean Stavropoulos"],
+    [maintainers: ["yunmikun"],
      licenses: ["Apache 2.0"],
-     links: %{"GitHub" => "https://github.com/stavro/arc_ecto"},
+     links: %{"GitHub" => "https://github.com/Elonsoft/arc_ecto"},
      files: ~w(mix.exs README.md lib)]
   end
 
   defp deps do
     [
       {:arc,  "~> 0.11.0"},
-      {:ecto, ">= 2.1.0"},
+      {:ecto, ">= 3.0.0"},
       {:mock, "~> 0.3.3", only: :test},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
