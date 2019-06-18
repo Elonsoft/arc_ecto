@@ -82,18 +82,24 @@ defmodule Arc.Ecto.Schema do
   end
 
   # Allow casting Plug.Uploads
-  defp cast_param(scope, _options, {field, upload = %{__struct__: Plug.Upload}}, fields) do
+  defp cast_param(_scope, _options, {field, upload = %{__struct__: Plug.Upload}}, fields) do
     [{field, {upload, scope}} | fields]
   end
 
+  # Allow updating
+  defp cast_param(_scope, _options, {_field, %{file_name: filename, updated_at: _}}, fields)
+  when is_binary(filename) do
+    fields
+  end
+
   # Allow casting binary data structs
-  defp cast_param(scope, _options, {field, upload = %{filename: filename, binary: binary}}, fields)
+  defp cast_param(_scope, _options, {field, upload = %{filename: filename, binary: binary}}, fields)
   when is_binary(filename) and is_binary(binary) do
     [{field, {upload, scope}} | fields]
   end
 
   # Allow base64.
-  defp cast_param(scope, _options, {field, base64 = <<"data:image/"::binary, _::binary>>}, fields) do
+  defp cast_param(_scope, _options, {field, base64 = <<"data:image/"::binary, _::binary>>}, fields) do
     image = base64_to_binary(base64)
     [{field, {image, scope}} | fields]
   end
