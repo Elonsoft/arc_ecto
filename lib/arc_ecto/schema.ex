@@ -26,6 +26,7 @@ defmodule Arc.Ecto.Schema do
     changeset
     |> do_apply_changes
     |> cast_attachments(params, allowed, options)
+    |> merge_changeset(changeset)
   end
 
   def cast_attachments(changeset = %Ecto.Changeset{}, allowed) do
@@ -114,5 +115,11 @@ defmodule Arc.Ecto.Schema do
       Keyword.get(options, :allow_paths, false) -> [{field, {path, scope}} | fields]
       true -> fields
     end
+  end
+
+  defp merge_changeset(changeset1, changeset2) do
+    changes = Map.merge(changeset2.changes, changeset1.changes)
+    params = Map.merge(changeset2.params, changeset1.params)
+    %{changeset1 | changes: changes, params: params}
   end
 end
