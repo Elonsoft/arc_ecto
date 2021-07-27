@@ -44,6 +44,7 @@ defmodule Arc.Ecto.Mixfile do
       {:arc,  "~> 0.11.0"},
       {:ecto, ">= 3.0.0"},
       {:mock, "~> 0.3.3", only: :test},
+      {:ecto, "~> 3.2"},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
