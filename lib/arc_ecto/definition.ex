@@ -31,13 +31,15 @@ defmodule Arc.Ecto.Definition do
       end
 
       def url(f, v, options), do: super(f, v, options)
-      
-      def delete({%{file_name: file_name, updated_at: _updated_at}, scope}), do: super({file_name, scope})
+
+      def delete({%{file_name: file_name, updated_at: _updated_at}, scope}),
+        do: super({file_name, scope})
 
       def delete(args), do: super(args)
 
       defp version_url(updated_at, url) do
         stamp = :calendar.datetime_to_gregorian_seconds(NaiveDateTime.to_erl(updated_at))
+
         case URI.parse(url).query do
           nil -> url <> "?v=#{stamp}"
           _ -> url <> "&v=#{stamp}"
