@@ -4,15 +4,17 @@ defmodule Arc.Ecto.Mixfile do
   @version "0.12.3"
 
   def project do
-    [app: :arc_ecto,
-     version: @version,
-     elixir: "~> 1.4",
-     elixirc_paths: elixirc_paths(Mix.env),
-     deps: deps(),
+    [
+      app: :arc_ecto,
+      version: @version,
+      elixir: "~> 1.4",
+      elixirc_paths: elixirc_paths(Mix.env()),
+      deps: deps(),
 
-    # Hex
-     description: description(),
-     package: package()]
+      # Hex
+      description: description(),
+      package: package()
+    ]
   end
 
   # Configuration for the OTP application
@@ -24,7 +26,7 @@ defmodule Arc.Ecto.Mixfile do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   defp description do
     """
@@ -33,15 +35,17 @@ defmodule Arc.Ecto.Mixfile do
   end
 
   defp package do
-    [maintainers: ["yunmikun"],
-     licenses: ["Apache 2.0"],
-     links: %{"GitHub" => "https://github.com/Elonsoft/arc_ecto"},
-     files: ~w(mix.exs README.md lib)]
+    [
+      maintainers: ["yunmikun"],
+      licenses: ["Apache 2.0"],
+      links: %{"GitHub" => "https://github.com/Elonsoft/arc_ecto"},
+      files: ~w(mix.exs README.md lib)
+    ]
   end
 
   defp deps do
     [
-      {:arc,  "~> 0.11.0"},
+      {:arc, "~> 0.11.0"},
       {:ecto, ">= 3.0.0"},
       {:mock, "~> 0.3.3", only: :test},
       {:ecto, "~> 3.2"},
