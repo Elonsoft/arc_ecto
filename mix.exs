@@ -1,7 +1,7 @@
 defmodule Arc.Ecto.Mixfile do
   use Mix.Project
 
-  @version "0.12.3"
+  @version "0.13.0"
 
   def project do
     [
